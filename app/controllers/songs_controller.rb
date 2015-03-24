@@ -19,7 +19,7 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    @song.destroy!
+    @song.update! deleted_at: Time.zone.now
     head :no_content
   end
 
