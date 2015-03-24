@@ -9,4 +9,5 @@
 #
 
 class Status < ActiveRecord::Base
+  validates :text, inclusion: %w{stop play skip}
 end

@@ -11,5 +11,9 @@
 require 'rails_helper'
 
 RSpec.describe Status, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#text' do
+    it do
+      is_expected.to validate_inclusion_of(:text).in_array(%w{stop play skip})
+    end
+  end
 end
