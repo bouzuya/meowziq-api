@@ -29,7 +29,7 @@ class Player
     @watcher = Thread.new do
       current_status = nil
       while true
-        status = Status.all.first
+        status = Status.first
         case status.text
         when 'play' then
           current_status = 'play'
