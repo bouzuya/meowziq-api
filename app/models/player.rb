@@ -17,10 +17,22 @@ class Player
     @player_pid = nil
     @player = Thread.new do
       while @play_next
-        path = 'dummy.mp3'
-        @player_pid = spawn "mplayer #{path}"
-        player = Process.detach @player_pid
-        player.join
+        sleep 1
+
+        # get current song
+        songs = Song.where(deleted_at: nil).order(id: :asc)
+        current_song = songs.first
+        next unless current_song
+        current_song.deleted_at = Time.zone.now
+        current_song.save!
+
+        # play
+        path = "#{Rails.root}/public/music/#{current_song.id}"
+        if File.exists? path
+          @player_pid = spawn "mplayer #{path}"
+          player = Process.detach @player_pid
+          player.join
+        end
       end
     end
   end
