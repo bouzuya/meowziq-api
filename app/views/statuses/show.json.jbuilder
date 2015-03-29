@@ -1,1 +1,1 @@
-json.status @status.text
+json.text @status.text
