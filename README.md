@@ -63,3 +63,11 @@ Add a song to playlist
 $ curl -X POST -F 'file=@music.mp3' http://localhost:8080/songs
 {"id":1,"artist":null,"title":null,"deleted_at":null,"created_at":"2015-03-29T07:33:46.230Z","updated_at":"2015-03-29T07:33:46.230Z"}
 ```
+
+# Author
+
+[bouzuya](https://github.com/bouzuya/) ([FaithCreates Inc.](https://github.com/faithcreates/))
+
+# License
+
+[MIT](LICENSE)
