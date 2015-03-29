@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'foreman'
 gem 'jbuilder', '~> 2.0'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '4.2.1'
@@ -28,4 +29,3 @@ group :production do
   gem 'rails_12factor'
   gem 'unicorn'
 end
-
