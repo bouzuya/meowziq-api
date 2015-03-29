@@ -1,5 +1,5 @@
 namespace :player do
-  task play: :environment do
+  task run: :environment do
     player = Player.new
     player.run
   end

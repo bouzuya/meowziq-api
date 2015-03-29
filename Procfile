@@ -1,2 +1,2 @@
 web: bundle exec rails s
-worker: bundle exec rake player:play
+worker: bundle exec rake player:run
