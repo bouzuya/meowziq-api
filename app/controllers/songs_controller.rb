@@ -10,9 +10,7 @@ class SongsController < ApplicationController
 
   def create
     @song = Song.create! song_params
-    dir = "#{Rails.root}/public/music"
-    FileUtils.mkdir_p dir
-    FileUtils.cp params[:file].tempfile.path, "#{dir}/#{@song.id}"
+    @song.save_file params[:file].tempfile.path
     render :show, status: :created, location: @song
   end
 

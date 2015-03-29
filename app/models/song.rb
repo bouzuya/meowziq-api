@@ -12,4 +12,16 @@
 #
 
 class Song < ActiveRecord::Base
+  def dir
+    "#{Rails.root}/public/music"
+  end
+
+  def path
+    "#{dir}/#{id}"
+  end
+
+  def save_file file
+    FileUtils.mkdir_p dir
+    FileUtils.cp file, "#{dir}/#{id}"
+  end
 end

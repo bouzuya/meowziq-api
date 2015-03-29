@@ -27,9 +27,8 @@ class Player
         current_song.save!
 
         # play
-        path = "#{Rails.root}/public/music/#{current_song.id}"
-        if File.exists? path
-          @player_pid = spawn "mplayer #{path}"
+        if File.exists? current_song.path
+          @player_pid = spawn "mplayer #{current_song.path}"
           player = Process.detach @player_pid
           player.join
         end
