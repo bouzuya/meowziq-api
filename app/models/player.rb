@@ -1,5 +1,10 @@
 class Player
   def run
+    @player_pid = nil
+    @play_next = true
+    @player = nil
+    @watcher = nil
+
     run_watcher
     @watcher.join
   end
@@ -7,7 +12,17 @@ class Player
   private
 
   def play
-    p 'play!'
+    return if @player_pid
+    @play_next = true
+    @player_pid = nil
+    @player = Thread.new do
+      while @play_next
+        path = 'dummy.mp3'
+        @player_pid = spawn "mplayer #{path}"
+        player = Process.detach @player_pid
+        player.join
+      end
+    end
   end
 
   def run_watcher
@@ -25,6 +40,7 @@ class Player
         when 'skip' then
           current_status = 'skip'
           skip
+          current_status = 'play' # to ignore the following update
           status.text = 'play'
           status.save!
         else
@@ -36,10 +52,16 @@ class Player
   end
 
   def skip
-    p 'skip!'
+    return unless @player_pid
+    @play_next = true
+    Process.kill :TERM, @player_pid
+    @player_pid = nil
   end
 
   def stop
-    p 'stop!'
+    return unless @player_pid
+    @play_next = false
+    Process.kill :TERM, @player_pid
+    @player_pid = nil
   end
 end
