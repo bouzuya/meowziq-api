@@ -20,7 +20,7 @@ class Player
         sleep 1
 
         # get current song
-        songs = Song.where(deleted_at: nil).order(id: :asc)
+        songs = Song.queue
         current_song = songs.first
         next unless current_song
         current_song.deleted_at = Time.zone.now

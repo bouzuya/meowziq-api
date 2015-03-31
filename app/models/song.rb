@@ -12,6 +12,10 @@
 #
 
 class Song < ActiveRecord::Base
+  def self.queue
+    where(deleted_at: nil).order(id: :asc)
+  end
+
   def dir
     "#{Rails.root}/public/music"
   end

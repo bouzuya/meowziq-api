@@ -2,7 +2,7 @@ class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
 
   def index
-    @songs = Song.where(deleted_at: nil).order(id: :asc)
+    @songs = Song.queue
   end
 
   def show
