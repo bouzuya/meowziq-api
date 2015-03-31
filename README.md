@@ -8,6 +8,7 @@ The Jukebox for FaithCreates Inc, is inspired by [codefirst/party-play](https://
 ```
 $ git clone https://github.com/faithcreates-tuesday/meowziq-api
 $ bundle install
+$ bundle exec rake db:setup
 $ bundle exec foreman start
 ```
 
