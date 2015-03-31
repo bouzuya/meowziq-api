@@ -1,11 +1,12 @@
-# party-play-api
+# :scream_cat: meowziq-api :scream_cat:
 
-The party-play API for FaithCreates Inc, is inspired by [codefirst/party-play](https://github.com/codefirst/party-play).
+The Jukebox for FaithCreates Inc, is inspired by [codefirst/party-play](https://github.com/codefirst/party-play).
+
 
 # Usage
 
 ```
-$ git clone https://github.com/faithcreates-tuesday/party-play-api
+$ git clone https://github.com/faithcreates-tuesday/meowziq-api
 $ bundle install
 $ bundle exec foreman start
 ```
