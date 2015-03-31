@@ -1,12 +1,7 @@
 class Player
   def run
-    @player_pid = nil
-    @play_next = true
-    @player = nil
-    @watcher = nil
-
-    run_watcher
-    @watcher.join
+    watcher = run_watcher
+    watcher.join
   end
 
   private
@@ -15,7 +10,11 @@ class Player
     return if @player_pid
     @play_next = true
     @player_pid = nil
-    @player = Thread.new do
+    run_player
+  end
+
+  def run_player
+    Thread.new do
       while @play_next
         sleep 1
 
@@ -25,7 +24,6 @@ class Player
         next_song.save!
         update_playing! next_song
 
-        # play
         if File.exists? next_song.path
           @player_pid = spawn "mplayer #{next_song.path}"
           player = Process.detach @player_pid
@@ -37,7 +35,7 @@ class Player
   end
 
   def run_watcher
-    @watcher = Thread.new do
+    Thread.new do
       current_status = nil
       while true
         status = Status.first
@@ -75,8 +73,6 @@ class Player
     Process.kill :TERM, @player_pid
     @player_pid = nil
   end
-
-  private
 
   def update_playing!(song)
     status = Status.first
