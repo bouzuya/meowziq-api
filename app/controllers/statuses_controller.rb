@@ -12,7 +12,7 @@ class StatusesController < ApplicationController
   private
 
   def set_status
-    @status = Status.all.first
+    @status = Status.first
   end
 
   def status_params
