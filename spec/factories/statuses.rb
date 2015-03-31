@@ -15,11 +15,11 @@
 
 FactoryGirl.define do
   factory :status do
-    text 'MyString'
+    text 'play'
     song nil
 
     trait :with_song do
-      after_build do |m|
+      after(:build) do |m|
         m.song = build(:song) unless m.song
       end
     end
