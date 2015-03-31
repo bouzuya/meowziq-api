@@ -80,7 +80,7 @@ class Player
 
   private
 
-  def update_playing(song)
+  def update_playing!(song)
     status = Status.first
     status.song = song
     status.save!
