@@ -25,12 +25,14 @@ class Player
         next unless current_song
         current_song.deleted_at = Time.zone.now
         current_song.save!
+        update_playing! current_song
 
         # play
         if File.exists? current_song.path
           @player_pid = spawn "mplayer #{current_song.path}"
           player = Process.detach @player_pid
           player.join
+          update_playing! nil
         end
       end
     end
@@ -74,5 +76,13 @@ class Player
     @play_next = false
     Process.kill :TERM, @player_pid
     @player_pid = nil
+  end
+
+  private
+
+  def update_playing(song)
+    status = Status.first
+    status.song = song
+    status.save!
   end
 end
