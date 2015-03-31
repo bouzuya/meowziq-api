@@ -12,6 +12,10 @@
 #
 
 class Song < ActiveRecord::Base
+  def self.next
+    queue.first
+  end
+
   def self.queue
     where(deleted_at: nil).order(id: :asc)
   end

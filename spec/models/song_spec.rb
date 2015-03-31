@@ -14,6 +14,20 @@
 require 'rails_helper'
 
 RSpec.describe Song, type: :model do
+  describe '.next' do
+    context 'when empty' do
+      subject { Song.next }
+      it { is_expected.to be nil }
+    end
+
+    context 'when have some songs' do
+      let!(:song1) { create(:song, deleted_at: Time.zone.now) }
+      let!(:song2) { create(:song, deleted_at: nil) }
+      subject { Song.next }
+      it { is_expected.to eq song2 }
+    end
+  end
+
   describe '.queue' do
     context 'when empty' do
       subject { Song.queue.to_a }

@@ -19,17 +19,15 @@ class Player
       while @play_next
         sleep 1
 
-        # get current song
-        songs = Song.queue
-        current_song = songs.first
-        next unless current_song
-        current_song.deleted_at = Time.zone.now
-        current_song.save!
-        update_playing! current_song
+        next_song = Song.next
+        next unless next_song
+        next_song.deleted_at = Time.zone.now
+        next_song.save!
+        update_playing! next_song
 
         # play
-        if File.exists? current_song.path
-          @player_pid = spawn "mplayer #{current_song.path}"
+        if File.exists? next_song.path
+          @player_pid = spawn "mplayer #{next_song.path}"
           player = Process.detach @player_pid
           player.join
           update_playing! nil
