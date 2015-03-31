@@ -21,4 +21,8 @@ RSpec.describe Status, type: :model do
       is_expected.to validate_inclusion_of(:text).in_array(%w{stop play skip})
     end
   end
+
+  describe '#song' do
+    it { is_expected.to belong_to(:song) }
+  end
 end

@@ -15,4 +15,6 @@
 
 class Status < ActiveRecord::Base
   validates :text, inclusion: %w{stop play skip}
+
+  belongs_to :song
 end
