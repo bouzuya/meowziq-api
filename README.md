@@ -14,9 +14,17 @@ $ bundle exec foreman start
 
 # API
 
-## Status
+## Status Resource
 
 ### GET /status
+
+Get status
+
+#### Parameters
+
+None
+
+#### Examples
 
 ```
 $ curl http://localhost:8080/status
@@ -24,6 +32,14 @@ $ curl http://localhost:8080/status
 ```
 
 ### PATCH /status
+
+Update status
+
+#### Parameters
+
+- text
+
+#### Examples
 
 Play
 
@@ -46,11 +62,17 @@ $ curl -X PATCH -d 'text=stop'  http://localhost:8080/status
 {"text":"stop"}
 ```
 
-## Song
+## Song Resource
 
 ### GET /songs
 
 Get songs
+
+#### Parameters
+
+None
+
+#### Examples
 
 ```
 $ curl http://localhost:8080/songs
@@ -60,6 +82,14 @@ $ curl http://localhost:8080/songs
 ### POST /songs
 
 Add a song to playlist
+
+#### Parameters
+
+- artist (optional)
+- file
+- title (optional)
+
+#### Examples
 
 ```
 $ curl -X POST -F 'file=@music.mp3' http://localhost:8080/songs
